@@ -124,7 +124,7 @@ data "template_file" "kubeconfig" {
   count    = "${var.enabled == "true" ? 1 : 0}"
   template = "${file("${path.module}/kubeconfig.tpl")}"
 
-  vars {
+  vars = {
     server                     = "${join("", aws_eks_cluster.default.*.endpoint)}"
     certificate_authority_data = "${local.certificate_authority_data}"
     cluster_name               = "${module.label.id}"
